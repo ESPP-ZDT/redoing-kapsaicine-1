@@ -1,6 +1,26 @@
 (() => {
   var __defProp = Object.defineProperty;
   var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+  var __async = (__this, __arguments, generator) => {
+    return new Promise((resolve, reject) => {
+      var fulfilled = (value) => {
+        try {
+          step(generator.next(value));
+        } catch (e) {
+          reject(e);
+        }
+      };
+      var rejected = (value) => {
+        try {
+          step(generator.throw(value));
+        } catch (e) {
+          reject(e);
+        }
+      };
+      var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+      step((generator = generator.apply(__this, __arguments)).next());
+    });
+  };
 
   // node_modules/kaboom/dist/kaboom.mjs
   var rr = Object.defineProperty;
@@ -2942,6 +2962,16 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     loadSound("monster death 1", "sounds/monster death 1.mp3");
     loadSound("bullet shoot", "sounds/bullet shoot.mp3");
     loadSprite("helmet", "sprites/helmet.png");
+    loadSprite("capitain", "sprites/1654911901763.png");
+    loadSprite("sergeant", "sprites/1654911151783.png");
+    loadSprite("cloveking", "sprites/1656253727807.png");
+    loadSprite("spicelord1", "sprites/1656191874473.png");
+    loadSound("spicelord1sound", "sounds/spice it up baby.mp3");
+    loadSound("halape", "sounds/halapeno monk.mp3");
+    loadSprite("healer", "sprites/1653836481981.png");
+    loadSound("healer hero", "sounds/healer hero.mp3");
+    loadSound("clove king", "sounds/clove king.mp3");
+    loadSprite("dragon1", "sprites/1654912978244.png");
   }
   __name(loadAssets, "loadAssets");
 
@@ -2958,7 +2988,8 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     ]);
     const txt = add([
       text("", {
-        width: width()
+        width: width(),
+        size: 23
       }),
       pos(0 + pad, height() - h + pad),
       z(100),
@@ -2997,9 +3028,38 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       sprite: "mark",
       msg: "ohhi how are you?",
       scale: 0.12
+    },
+    "q": {
+      sprite: "capitain",
+      msg: "yeah we aint goin in. good luck. im not going to make a spice related pun. you may hear allota that",
+      scale: 0.08
+    },
+    "k": {
+      sprite: "cloveking",
+      msg: "Look at this destroyed land... My clovely home... You dont seem fallen hero... but... no time. take my arm as a weapon. kapsaicine... he came from above... is THIS HERO THING EVEN WORKING? GO! ",
+      scale: 0.08
     }
   };
   var npcs_default = characters;
+
+  // code/patrol.js
+  function patrol(speed = 180, dir = 1) {
+    return {
+      id: "patrol",
+      require: ["pos", "area"],
+      add() {
+        this.on("collide", (obj, col) => {
+          if (col.isLeft() || col.isRight()) {
+            dir = -dir;
+          }
+        });
+      },
+      update() {
+        this.move(speed * dir, 0);
+      }
+    };
+  }
+  __name(patrol, "patrol");
 
   // code/main.js
   no({
@@ -3013,6 +3073,8 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
   var level_id = 0;
   var HERO_SPEED = 300;
   var JUMP_SPEED = 600;
+  var DRAGON_SPEED = 900;
+  var BULLET_SPEED = 800;
   scene("game", ({ level_id: level_id2 }) => {
     gravity(1600);
     const hero = add([
@@ -3035,9 +3097,8 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       scale(0.01),
       follow(hero, vec2(0, -17)),
       z(21),
-      opacity(1)
+      opacity(0)
     ]);
-    projector.opacity = 0;
     hero.onUpdate(() => {
       camPos(hero.pos);
       if (hero.health <= 0) {
@@ -3151,23 +3212,23 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       [
         "ffffffffffffffffffff",
         "m      H  mm       m",
+        "m   u  H  mm       m",
+        "m      H  mm       m",
+        "m      H  mm       m",
+        "mq l   H  mm      mm",
+        "mffffffH  mm   -   mm",
+        "m      H      -     m",
+        "m      H         - m",
         "m      H  mm       m",
         "m      H  mm       m",
         "m      H  mm       m",
-        "ma     H  mm      mm",
-        "mffffffH  mm      mm",
-        "m      H           m",
-        "m      H           m",
-        "m      H  mm       m",
-        "m      H  mm       m",
-        "m      H  mm       m",
-        "m a    H  mm     o m",
+        "ms  k eH  mm     o m",
         "mffffffH  m      mmm",
         "m      H  m      mmm",
         "m      H  mm       m",
         "m      H  mm       m",
         "m      H        p  m",
-        "m a    H           m",
+        "m a d  H           m",
         "fffffffffffffffffffff"
       ],
       [
@@ -3183,8 +3244,30 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
         "m         H        m",
         "m         H        m",
         "m         H        m",
+        "m         H       om",
+        "mwwww           fffm",
+        "mfffffffff         m",
         "m         H        m",
-        "mwwwwo          fffm",
+        "m         H        m",
+        "m         H        m",
+        "m         H       pm",
+        "ffffffffffffffffffff"
+      ],
+      [
+        "ffffffffffffffffffffffffffffffffffffffffff",
+        "m         H                              m",
+        "m         H                              m",
+        "m         H                              m",
+        "m         H                              m",
+        "m         H                              m",
+        "mfffff   fH                             fm",
+        "m         H        m",
+        "m                  m",
+        "m         H        m",
+        "m         H        m",
+        "m         H        m",
+        "m         H       om",
+        "mwwww           fffm",
         "mfffffffff         m",
         "m         H        m",
         "m         H        m",
@@ -3198,6 +3281,15 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       width: 64,
       height: 64,
       pos: vec2(0, 0),
+      "-": () => [
+        sprite("dragon1"),
+        pos(),
+        origin("center"),
+        area(),
+        "dragon",
+        scale(0.13),
+        state("move", ["idle", "attack", "move"])
+      ],
       "m": () => [
         sprite("clovewall"),
         "wall",
@@ -3234,7 +3326,27 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
         origin("center"),
         "enemy",
         "paprika",
+        patrol(),
         scale(0.07)
+      ],
+      "d": () => [
+        sprite("bean"),
+        area(),
+        origin("center"),
+        "bean"
+      ],
+      "s": () => [
+        sprite("spicelord1"),
+        "spicelord1",
+        z(17),
+        scale(0.09),
+        area()
+      ],
+      "l": () => [
+        sprite("sergeant"),
+        "sergeant",
+        z(17),
+        scale(0.09)
       ],
       "o": () => [
         sprite("monk"),
@@ -3243,6 +3355,21 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
         "monk",
         "halapeno",
         scale(0.07)
+      ],
+      "u": () => [
+        sprite("healer"),
+        area(),
+        origin("center"),
+        "ultrahero",
+        "healer",
+        scale(0.23)
+      ],
+      "e": () => [
+        sprite("projector"),
+        area(),
+        origin("center"),
+        "weapon1",
+        scale(0.03)
       ],
       any(ch) {
         const char = npcs_default[ch];
@@ -3258,21 +3385,43 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
         }
       }
     };
+    const game_level = addLevel(current_map, levelcfg);
+    let dragon = [get("dragon")[0], get("dragon")[1], get("dragon")[2]];
+    dragon.forEach((mob) => {
+      mob.onStateEnter("idle", () => __async(void 0, null, function* () {
+        yield wait(0.5);
+        mob.enterState("attack");
+      }));
+      mob.onStateEnter("attack", () => __async(void 0, null, function* () {
+        if (hero.exists()) {
+          const dir = hero.pos.sub(mob.pos).unit();
+          add([
+            pos(mob.pos),
+            move(dir, BULLET_SPEED),
+            rect(12, 12),
+            area(),
+            cleanup(),
+            origin("center"),
+            color(BLUE),
+            "bullet"
+          ]);
+        }
+        yield wait(1);
+        mob.enterState("move");
+      }));
+      mob.onStateEnter("move", () => __async(void 0, null, function* () {
+        yield wait(2);
+        mob.enterState("idle");
+      }));
+      mob.onStateUpdate("move", () => {
+        if (!hero.exists())
+          return;
+        const dir = hero.pos.sub(mob.pos).unit();
+        mob.move(dir.scale(DRAGON_SPEED));
+      });
+      mob.enterState("move");
+    });
     const dialog = addDialog();
-    hero.onCollide("character", (ch) => {
-      dialog.say(ch.msg);
-      console.log("colliding");
-    });
-    hero.onCollide("monk", () => {
-      hero.heal(100);
-      debug.log("hero health" + hero.hp());
-      burp();
-    });
-    onCollide("laser", "enemy", (laser, enemy) => {
-      enemy.destroy();
-      play("monster death 1");
-      laser.destroy();
-    });
     const level_label = add([
       text("level " + level_id2),
       pos(0, 0),
@@ -3287,7 +3436,37 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       fixed(),
       z(190)
     ]);
-    const game_level = addLevel(current_map, levelcfg);
+    hero.onCollide("character", (ch) => {
+      dialog.say(ch.msg);
+      console.log("colliding");
+    });
+    hero.onCollide("monk", () => {
+      play("halape");
+      hero.heal(100);
+      health_label.text = `Hero health: ${hero.hp()}`;
+      debug.log("hero health" + hero.hp());
+    });
+    hero.onCollide("healer", () => {
+      play("healer hero");
+      hero.heal(100);
+      health_label.text = `Hero health: ${hero.hp()}`;
+    });
+    hero.onCollide("bean", () => {
+      burp();
+    });
+    hero.onCollide("spicelord1", () => {
+      play("spicelord1sound");
+    });
+    hero.onCollide("weapon1", (weapon2) => {
+      play("clove king");
+      weapon2.destroy();
+      projector.opacity = 1;
+    });
+    onCollide("laser", "enemy", (laser, enemy) => {
+      enemy.destroy();
+      play("monster death 1");
+      laser.destroy();
+    });
   });
   go("game", { level_id });
   scene("lose", () => {

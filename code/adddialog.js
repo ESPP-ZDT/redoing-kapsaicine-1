@@ -11,6 +11,7 @@ export function addDialog() {
 		const txt = add([
 			text("", {
 				width: width(),
+        size: 23,
 			}),
 			pos(0 + pad, height() - h + pad),
 			z(100),
