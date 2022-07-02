@@ -17,7 +17,7 @@ play('wuja theme')
 let level_id = 0
 const HERO_SPEED = 300 //hero movement speed variable
 const JUMP_SPEED = 600 //hero movement speed variable
-const DRAGON_SPEED = 900
+const DRAGON_SPEED = 100
 const BULLET_SPEED = 800
 
 scene("game", ({level_id}) => {
@@ -190,6 +190,7 @@ scene("game", ({level_id}) => {
   hero.onCollide("portal", (portal) => {
     level_id++
     
+
     
     if (level_id < maps.length){
       
@@ -201,30 +202,30 @@ scene("game", ({level_id}) => {
   })
 
 
-  
+  //collider 1 = !
   
   maps = [
       [
-      "ffffffffffffffffffff",
-      "m      H  mm       m",
-      "m   u  H  mm       m",
-      "m      H  mm       m",
-      "m      H  mm       m",
-      "mq l   H  mm      mm",
-      "mffffffH  mm   -   mm",
-      "m      H      -     m",
-      "m      H         - m",
-      "m      H  mm       m",
-      "m      H  mm       m",
-      "m      H  mm       m",
-      "ms  k eH  mm     o m",
-      "mffffffH  m      mmm",
-      "m      H  m      mmm",
-      "m      H  mm       m",
-      "m      H  mm       m",
-      "m      H        p  m",
-      "m a d  H           m",
-      "fffffffffffffffffffff"
+      "fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "m      H  mm                                                                                                 m",
+      "m   u  H  mm                                                                                                   m",
+      "m      H  mm                                                                                                     m",
+      "m      H  mm                                                                                                   m",
+      "mq l   H  mm                                                                                              mm",
+      "mffffffH  mm                                                                                           -   mm",
+      "m      H                                                                                              -     m",
+      "m      H                                                                                                 - m",
+      "m      H  mm                                                                                               m",
+      "m      H  mm                                                                                               m",
+      "m      H  mm                                                                                             m",
+      "ms  k eH  mm                                                                                             o m",
+      "mffffffH  m                                                                                            mmm",
+      "m      H  m                                                                                                mmm",
+      "m      H  mm                                                                                           m",
+      "m      H  mm                                                                                           m",
+      "m      H                                                                                            m",
+      "m a d  H      p                                                                                      m",
+      "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
       ],
       [
       "fffffffffffffffffffff",
@@ -341,7 +342,7 @@ scene("game", ({level_id}) => {
     ]
   
   current_map = maps[level_id]
-  let enemies = ['imbirwar2','lassie','halaraptor','piripiripyro', 'lassiedragon','kapsaicine']
+  //let enemies = ['imbirwar2','lassie','halaraptor','piripiripyro', 'lassiedragon','kapsaicine']
 
   let levelcfg = {
     width:64,//width of all of the sprites on map  
@@ -375,7 +376,7 @@ scene("game", ({level_id}) => {
       
       ],
     'p': () =>[
-      sprite('descending'),
+      sprite('portal'),
         'portal',
         z(17),
         scale(0.07),

@@ -2971,6 +2971,12 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     loadSprite("healer", "sprites/1653836481981.png");
     loadSound("healer hero", "sounds/healer hero.mp3");
     loadSound("clove king", "sounds/clove king.mp3");
+    loadSprite("halaraptor", "sprites/halaraptor.png");
+    loadSprite("kapsaicine", "sprites/kapsaicine.png");
+    loadSprite("imbirwar2", "sprites/imbirwar2.png");
+    loadSprite("lassie dragon", "sprites/lassie dragon.png");
+    loadSprite("lassie", "sprites/lassie.png");
+    loadSprite("piripiripyro", "sprites/piripiripyro.png");
     loadSprite("dragon1", "sprites/1654912978244.png");
   }
   __name(loadAssets, "loadAssets");
@@ -3073,7 +3079,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
   var level_id = 0;
   var HERO_SPEED = 300;
   var JUMP_SPEED = 600;
-  var DRAGON_SPEED = 900;
+  var DRAGON_SPEED = 100;
   var BULLET_SPEED = 800;
   scene("game", ({ level_id: level_id2 }) => {
     gravity(1600);
@@ -3210,26 +3216,26 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     });
     maps = [
       [
-        "ffffffffffffffffffff",
-        "m      H  mm       m",
-        "m   u  H  mm       m",
-        "m      H  mm       m",
-        "m      H  mm       m",
-        "mq l   H  mm      mm",
-        "mffffffH  mm   -   mm",
-        "m      H      -     m",
-        "m      H         - m",
-        "m      H  mm       m",
-        "m      H  mm       m",
-        "m      H  mm       m",
-        "ms  k eH  mm     o m",
-        "mffffffH  m      mmm",
-        "m      H  m      mmm",
-        "m      H  mm       m",
-        "m      H  mm       m",
-        "m      H        p  m",
-        "m a d  H           m",
-        "fffffffffffffffffffff"
+        "fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+        "m      H  mm                                                                                                 m",
+        "m   u  H  mm                                                                                                   m",
+        "m      H  mm                                                                                                     m",
+        "m      H  mm                                                                                                   m",
+        "mq l   H  mm                                                                                              mm",
+        "mffffffH  mm                                                                                           -   mm",
+        "m      H                                                                                              -     m",
+        "m      H                                                                                                 - m",
+        "m      H  mm                                                                                               m",
+        "m      H  mm                                                                                               m",
+        "m      H  mm                                                                                             m",
+        "ms  k eH  mm                                                                                             o m",
+        "mffffffH  m                                                                                            mmm",
+        "m      H  m                                                                                                mmm",
+        "m      H  mm                                                                                           m",
+        "m      H  mm                                                                                           m",
+        "m      H                                                                                            m",
+        "m a d  H      p                                                                                      m",
+        "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
       ],
       [
         "fffffffffffffffffffff",
@@ -3274,10 +3280,76 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
         "m         H        m",
         "m         H       pm",
         "ffffffffffffffffffff"
+      ],
+      [
+        "ffffffffffffffffffffffffffffffffffffffffff",
+        "m         H                              m",
+        "m         H    ---                          m",
+        "m         H                              m",
+        "m         H                              m",
+        "m         H                              m",
+        "mfffff   fH                             fm",
+        "m         H                      m",
+        "m                  m",
+        "m         H        m",
+        "m         H        m",
+        "m         H        m",
+        "m         H       om",
+        "mwwww           fffm",
+        "mfffffffff         m",
+        "m         H        m",
+        "m         H        m",
+        "m         H        m",
+        "m         H       pm",
+        "ffffffffffffffffffff"
+      ],
+      [
+        "ffffffffffffffffffffffffffffffffffffffffff",
+        "m         H                              m",
+        "m         H    ---                          m",
+        "m         H                              m",
+        "m         H                              m",
+        "m         H                              m",
+        "mfffff   fH                             fm",
+        "m         H                      m",
+        "m                  m",
+        "m         H        m",
+        "m         H        m",
+        "m         H        m",
+        "m         H       om",
+        "mwwww           fffm",
+        "mfffffffff         m",
+        "m         H        m",
+        "m         H        m",
+        "m         H        m",
+        "m         H       pm",
+        "ffffffffffffffffffff"
+      ],
+      [
+        "ffffffffffffffffffffffffffffffffffffffffff",
+        "m         H                              m",
+        "m         H    ---                          m",
+        "m         H                              m",
+        "m         H                              m",
+        "m         H                              m",
+        "mfffff   fH                             fm",
+        "m         H                      m",
+        "m                  m",
+        "m         H        m",
+        "m         H        m",
+        "m         H        m",
+        "m         H       om",
+        "mwwww           fffm",
+        "mfffffffff         m",
+        "m         H        m",
+        "m         H        m",
+        "m         H        m",
+        "m         H       pm",
+        "ffffffffffffffffffff"
       ]
     ];
     current_map = maps[level_id2];
-    const levelcfg = {
+    let levelcfg = {
       width: 64,
       height: 64,
       pos: vec2(0, 0),
@@ -3307,7 +3379,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
         origin("center")
       ],
       "p": () => [
-        sprite("descending"),
+        sprite("portal"),
         "portal",
         z(17),
         scale(0.07),
