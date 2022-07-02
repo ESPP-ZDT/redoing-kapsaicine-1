@@ -59,7 +59,9 @@ loadSprite("lassie", "sprites/lassie.png");
 loadSprite("piripiripyro", "sprites/piripiripyro.png");
   
 loadSprite("dragon1", "sprites/1654912978244.png");
-
+loadSprite("armor1", "sprites/armor1.png");
+loadSprite("armor2", "sprites/1654823434109.png");
+loadSprite("mobcol1", "sprites/1654823279087.png");
 }
 
 

@@ -2978,6 +2978,9 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     loadSprite("lassie", "sprites/lassie.png");
     loadSprite("piripiripyro", "sprites/piripiripyro.png");
     loadSprite("dragon1", "sprites/1654912978244.png");
+    loadSprite("armor1", "sprites/armor1.png");
+    loadSprite("armor2", "sprites/1654823434109.png");
+    loadSprite("mobcol1", "sprites/1654823279087.png");
   }
   __name(loadAssets, "loadAssets");
 
@@ -3105,6 +3108,16 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       z(21),
       opacity(0)
     ]);
+    const armor = add([
+      pos(),
+      sprite("armor1"),
+      origin("center"),
+      scale(0.03),
+      follow(hero, vec2(0, -8)),
+      z(20),
+      opacity(1),
+      color(255, 255, 255)
+    ]);
     hero.onUpdate(() => {
       camPos(hero.pos);
       if (hero.health <= 0) {
@@ -3149,6 +3162,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     onKeyDown("right", () => {
       projector.angle = 90;
       hero.flipX(true);
+      armor.flipX(true);
       if (hero.isClimbing) {
         hero.use(body());
         hero.weight = 1;
@@ -3158,6 +3172,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     onKeyDown("left", () => {
       projector.angle = 270;
       hero.flipX(false);
+      armor.flipX(false);
       if (hero.isClimbing) {
         hero.use(body());
         hero.weight = 1;
@@ -3222,12 +3237,12 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
         "m      H  mm                                                                                                     m",
         "m      H  mm                                                                                                   m",
         "mq l   H  mm                                                                                              mm",
-        "mffffffH  mm                                                                                           -   mm",
-        "m      H                                                                                              -     m",
-        "m      H                                                                                                 - m",
+        "mffffffH  mm                                                                                          $-   mm",
+        "m      H                                                                                             $-     m",
+        "m      H                                                                                                $- m",
         "m      H  mm                                                                                               m",
         "m      H  mm                                                                                               m",
-        "m      H  mm                                                                                             m",
+        "m      H  mm                                                                                            m",
         "ms  k eH  mm                                                                                             o m",
         "mffffffH  m                                                                                            mmm",
         "m      H  m                                                                                                mmm",
@@ -3378,6 +3393,15 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
         scale(0.07),
         origin("center")
       ],
+      "$": () => [
+        sprite("mobcol1"),
+        "mobcollider1",
+        area(scale(1, 0.5)),
+        solid(),
+        z(2),
+        scale(0.1),
+        origin("center")
+      ],
       "p": () => [
         sprite("portal"),
         "portal",
@@ -3464,6 +3488,10 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
         yield wait(0.5);
         mob.enterState("attack");
       }));
+      mob.onCollide("mobcollider1", (collider) => {
+        collider.destroy();
+        mob.use(sprite("lassie"));
+      });
       mob.onStateEnter("attack", () => __async(void 0, null, function* () {
         if (hero.exists()) {
           const dir = hero.pos.sub(mob.pos).unit();
@@ -3508,11 +3536,18 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       fixed(),
       z(190)
     ]);
+    hero.onCollide("dragon", () => {
+      hero.hurt(100);
+      health_label.text = `Hero health: ${hero.hp()}`;
+      debug.log("hero health" + hero.hp());
+      go("lose");
+    });
     hero.onCollide("character", (ch) => {
       dialog.say(ch.msg);
       console.log("colliding");
     });
     hero.onCollide("monk", () => {
+      armor.use(sprite("mark"));
       play("halape");
       hero.heal(100);
       health_label.text = `Hero health: ${hero.hp()}`;
@@ -3535,6 +3570,11 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       projector.opacity = 1;
     });
     onCollide("laser", "enemy", (laser, enemy) => {
+      enemy.destroy();
+      play("monster death 1");
+      laser.destroy();
+    });
+    onCollide("laser", "dragon", (laser, enemy) => {
       enemy.destroy();
       play("monster death 1");
       laser.destroy();

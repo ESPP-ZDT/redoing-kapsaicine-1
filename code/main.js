@@ -48,6 +48,18 @@ scene("game", ({level_id}) => {
     z(21),
     opacity(0)
   ])
+  const armor = add([
+  	pos(),
+  	sprite("armor1"),
+  	origin("center"),
+    //color(105,105,105),
+    scale(0.03),
+    //health(1000),
+  	follow(hero, vec2(0, -8)),
+    z(20),
+    opacity(1),
+    color(255,255,255)
+  ])
   
   //projector.opacity = 0
   //HERO CAMERA AND DEATH
@@ -107,6 +119,7 @@ scene("game", ({level_id}) => {
   onKeyDown('right', () => {
     projector.angle = 90
     hero.flipX(true)
+    armor.flipX(true)
       if (hero.isClimbing) {
               hero.use(body())
               hero.weight = 1
@@ -117,6 +130,7 @@ scene("game", ({level_id}) => {
   onKeyDown('left', () => {
     projector.angle = 270
     hero.flipX(false)
+    armor.flipX(false)
       if (hero.isClimbing) {
                 hero.use(body())
                 hero.weight = 1
@@ -212,12 +226,12 @@ scene("game", ({level_id}) => {
       "m      H  mm                                                                                                     m",
       "m      H  mm                                                                                                   m",
       "mq l   H  mm                                                                                              mm",
-      "mffffffH  mm                                                                                           -   mm",
-      "m      H                                                                                              -     m",
-      "m      H                                                                                                 - m",
+      "mffffffH  mm                                                                                          $-   mm",
+      "m      H                                                                                             $-     m",
+      "m      H                                                                                                $- m",
       "m      H  mm                                                                                               m",
       "m      H  mm                                                                                               m",
-      "m      H  mm                                                                                             m",
+      "m      H  mm                                                                                            m",
       "ms  k eH  mm                                                                                             o m",
       "mffffffH  m                                                                                            mmm",
       "m      H  m                                                                                                mmm",
@@ -358,6 +372,7 @@ scene("game", ({level_id}) => {
 	// This enemy cycle between 3 states, and start from "idle" state
 	    state("move", [ "idle", "attack", "move", ]),
       ],
+    
     'm': () =>[
       sprite('clovewall'),//wall sprite
         'wall',
@@ -372,6 +387,16 @@ scene("game", ({level_id}) => {
         solid(),
         z(2),
         scale(0.07),
+        origin('center')
+      
+      ],
+    '$': () =>[
+      sprite('mobcol1'),//floor sprite
+        'mobcollider1',
+        area(scale(1,0.5)),
+        solid(),
+        z(2),
+        scale(0.10),
         origin('center')
       
       ],
@@ -468,7 +493,11 @@ scene("game", ({level_id}) => {
   	await wait(0.5)
   	mob.enterState("attack")
   })
-  
+    mob.onCollide("mobcollider1", (collider) => {
+		  collider.destroy()
+      mob.use(sprite("lassie"))
+    
+	})
   // When we enter "attack" state, we fire a bullet, and enter "move" state after 1 sec
   mob.onStateEnter("attack", async () => {
   
@@ -536,12 +565,22 @@ scene("game", ({level_id}) => {
   
 
 
-  
+  hero.onCollide("dragon", () => {
+    //play('halape')
+		hero.hurt(100)
+   // health_label.text = health: ${hero.hp()}
+    health_label.text = `Hero health: ${hero.hp()}`
+    debug.log('hero health' +hero.hp())
+    go('lose')
+    //burp()
+    
+	})
   hero.onCollide("character", (ch) => {
 		dialog.say(ch.msg)
     console.log('colliding')
 	})
   hero.onCollide("monk", () => {
+    armor.use(sprite("mark"))
     play('halape')
 		hero.heal(100)
    // health_label.text = health: ${hero.hp()}
@@ -572,6 +611,11 @@ scene("game", ({level_id}) => {
     
 	})
   onCollide("laser","enemy", (laser, enemy) =>{
+  enemy.destroy()
+  play('monster death 1')
+  laser.destroy()
+})
+  onCollide("laser","dragon", (laser, enemy) =>{
   enemy.destroy()
   play('monster death 1')
   laser.destroy()
