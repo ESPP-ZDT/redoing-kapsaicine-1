@@ -1,9 +1,11 @@
+import maps from './maps'
 import weapon from "./weapon"
 import kaboom from "kaboom"
 import loadAssets from "./assets"
 import {addDialog} from './adddialog.js'
 import characters from './npcs'
 import patrol from "./patrol"
+
 
 kaboom({
   background: [255, 250, 205],
@@ -219,142 +221,6 @@ scene("game", ({level_id}) => {
 
   //collider 1 = !
   
-  maps = [
-      [
-      "fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
-      "m      H  mm                                                                                                 m",
-      "m   u  H  mm                                                                                                   m",
-      "m      H  mm                                                                                                     m",
-      "m      H  mm                                                                                                   m",
-      "mq l   H  mm                                                                                              mm",
-      "mffffffH  mm                                                                                          $-   mm",
-      "m      H                                                                                             $-     m",
-      "m      H                                                                                                $- m",
-      "m      H  mm                                                                                               m",
-      "m      H  mm                                                                                               m",
-      "m      H  mm                                                                                            m",
-      "ms  k eH  mm                                                                                             o m",
-      "mffffffH  m                                                                                            mmm",
-      "m      H  m                                                                                                mmm",
-      "m      H  mm                                                                                           m",
-      "m      H  mm                                                                                           m",
-      "m      H                                                                                            m",
-      "m a d* H      p                                                                                      m",
-      "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
-      ],
-      [
-      "fffffffffffffffffffff",
-      "m         H        m",
-      "m         H        m",
-      "m         H        m",
-      "m         H   ---     m",
-      "m         H        m",
-      "mfffff   fH       fm",
-      "m         H        m",
-      "m                  m",
-      "m         H        m",
-      "m         H        m",
-      "m         H        m",
-      "m         H       om",
-      "mwwww           fffm",
-      "mfffffffff         m",
-      "m         H        m",
-      "m         H        m",
-      "m         H        m",
-      "m         H       pm",
-      "ffffffffffffffffffff"
-      ],
-      [
-      "ffffffffffffffffffffffffffffffffffffffffff",
-      "m         H                              m",
-      "m         H    ---                          m",
-      "m         H                              m",
-      "m         H                              m",
-      "m         H                              m",
-      "mfffff   fH                             fm",
-      "m         H        m",
-      "m                  m",
-      "m         H        m",
-      "m         H        m",
-      "m         H        m",
-      "m         H       om",
-      "mwwww           fffm",
-      "mfffffffff         m",
-      "m         H        m",
-      "m         H        m",
-      "m         H        m",
-      "m         H       pm",
-      "ffffffffffffffffffff"
-      ],
-    
-      [
-        "ffffffffffffffffffffffffffffffffffffffffff",
-        "m         H                              m",
-        "m         H    ---                          m",
-        "m         H                              m",
-        "m         H                              m",
-        "m         H                              m",
-        "mfffff   fH                             fm",
-        "m         H                      m",
-        "m                  m",
-        "m         H        m",
-        "m         H        m",
-        "m         H        m",
-        "m         H       om",
-        "mwwww           fffm",
-        "mfffffffff         m",
-        "m         H        m",
-        "m         H        m",
-        "m         H        m",
-        "m         H       pm",
-        "ffffffffffffffffffff"
-        ],
-      [
-        "ffffffffffffffffffffffffffffffffffffffffff",
-        "m         H                              m",
-        "m         H    ---                          m",
-        "m         H                              m",
-        "m         H                              m",
-        "m         H                              m",
-        "mfffff   fH                             fm",
-        "m         H                      m",
-        "m                  m",
-        "m         H        m",
-        "m         H        m",
-        "m         H        m",
-        "m         H       om",
-        "mwwww           fffm",
-        "mfffffffff         m",
-        "m         H        m",
-        "m         H        m",
-        "m         H        m",
-        "m         H       pm",
-        "ffffffffffffffffffff"
-        ],
-        [
-        "ffffffffffffffffffffffffffffffffffffffffff",
-        "m         H                              m",
-        "m         H    ---                          m",
-        "m         H                              m",
-        "m         H                              m",
-        "m         H                              m",
-        "mfffff   fH                             fm",
-        "m         H                      m",
-        "m                  m",
-        "m         H        m",
-        "m         H        m",
-        "m         H        m",
-        "m         H       om",
-        "mwwww           fffm",
-        "mfffffffff         m",
-        "m         H        m",
-        "m         H        m",
-        "m         H        m",
-        "m         H       pm",
-        "ffffffffffffffffffff"
-        ],
-      
-    ]
   
   current_map = maps[level_id]
   //let enemies = ['imbirwar2','lassie','halaraptor','piripiripyro', 'lassiedragon','kapsaicine']
