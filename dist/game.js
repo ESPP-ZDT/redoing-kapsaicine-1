@@ -2981,6 +2981,8 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     loadSprite("armor1", "sprites/armor1.png");
     loadSprite("armor2", "sprites/1654823434109.png");
     loadSprite("mobcol1", "sprites/1654823279087.png");
+    loadSprite("husaria", "sprites/husaria.png");
+    loadSprite("anisebullet", "sprites/anisebullet.png");
   }
   __name(loadAssets, "loadAssets");
 
@@ -3198,13 +3200,11 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     onKeyPress("t", () => {
       play("bullet shoot");
       let laser = add([
-        sprite("bullet"),
+        sprite("anisebullet"),
+        scale(0.18),
         pos(projector.pos.x, projector.pos.y),
         origin("center"),
-        area({
-          width: 30,
-          height: 30
-        }),
+        area(scale(0.5)),
         move(projector.angle - 90, 500),
         cleanup(),
         "laser"
@@ -3249,7 +3249,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
         "m      H  mm                                                                                           m",
         "m      H  mm                                                                                           m",
         "m      H                                                                                            m",
-        "m a d  H      p                                                                                      m",
+        "m a d* H      p                                                                                      m",
         "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
       ],
       [
@@ -3467,6 +3467,13 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
         "weapon1",
         scale(0.03)
       ],
+      "*": () => [
+        sprite("husaria"),
+        area(),
+        origin("center"),
+        "husaria_armor",
+        scale(0.03)
+      ],
       any(ch) {
         const char = npcs_default[ch];
         if (char) {
@@ -3568,6 +3575,11 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       play("clove king");
       weapon2.destroy();
       projector.opacity = 1;
+    });
+    hero.onCollide("husaria_armor", (husaria) => {
+      armor.use(sprite("husaria"));
+      husaria.destroy();
+      armor.opacity = 1;
     });
     onCollide("laser", "enemy", (laser, enemy) => {
       enemy.destroy();

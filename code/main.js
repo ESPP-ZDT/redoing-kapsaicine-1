@@ -167,13 +167,14 @@ scene("game", ({level_id}) => {
 
     let laser = add([
   	// list of components
-  	  sprite("bullet"),
+  	  sprite("anisebullet"),
+      scale(0.18),
   	  pos(projector.pos.x, projector.pos.y),
       origin("center"),
-  	  area({
-        width:30,
-        height: 30
-      }),
+  	  area(scale(0.5)),//{
+        //width:30,
+        //height: 30
+      
       move(projector.angle-90, 500),
       cleanup(),
       'laser'
@@ -238,7 +239,7 @@ scene("game", ({level_id}) => {
       "m      H  mm                                                                                           m",
       "m      H  mm                                                                                           m",
       "m      H                                                                                            m",
-      "m a d  H      p                                                                                      m",
+      "m a d* H      p                                                                                      m",
       "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
       ],
       [
@@ -464,6 +465,13 @@ scene("game", ({level_id}) => {
   	'weapon1',
       scale(0.03),
   	  ],
+    "*": () => [
+  		sprite("husaria"),
+  		area(),
+  		origin("center"),
+  	'husaria_armor',
+      scale(0.03),
+  	  ],
     
     
     any(ch) {
@@ -608,6 +616,15 @@ scene("game", ({level_id}) => {
     play('clove king')
     weapon.destroy()
     projector.opacity = 1
+    //laser.use(sprite(''))
+    
+	})
+  hero.onCollide("husaria_armor", (husaria) => {
+    //play('clove king')
+    //laser.use(sprite("anisebullet"))
+    armor.use(sprite("husaria"))
+    husaria.destroy()
+    armor.opacity = 1
     
 	})
   onCollide("laser","enemy", (laser, enemy) =>{
