@@ -3236,7 +3236,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
         "m         H        m",
         "m         H        m",
         "m         H        m",
-        "m         H        m",
+        "m         H   ---     m",
         "m         H        m",
         "mfffff   fH       fm",
         "m         H        m",
@@ -3256,7 +3256,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       [
         "ffffffffffffffffffffffffffffffffffffffffff",
         "m         H                              m",
-        "m         H                              m",
+        "m         H    ---                          m",
         "m         H                              m",
         "m         H                              m",
         "m         H                              m",

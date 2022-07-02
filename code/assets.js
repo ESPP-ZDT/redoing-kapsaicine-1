@@ -51,6 +51,13 @@ loadSprite("healer", "sprites/1653836481981.png");
 loadSound("healer hero", "sounds/healer hero.mp3");
 loadSound("clove king", "sounds/clove king.mp3");
   
+loadSprite("halaraptor", "sprites/halaraptor.png");
+loadSprite("kapsaicine", "sprites/kapsaicine.png");
+loadSprite("imbirwar2", "sprites/imbirwar2.png");
+loadSprite("lassie dragon", "sprites/lassie dragon.png");
+loadSprite("lassie", "sprites/lassie.png");
+loadSprite("piripiripyro", "sprites/piripiripyro.png");
+  
 loadSprite("dragon1", "sprites/1654912978244.png");
 
 }

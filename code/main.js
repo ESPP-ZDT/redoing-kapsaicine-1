@@ -185,17 +185,21 @@ scene("game", ({level_id}) => {
         //     // player.isClimbing = false
         // }
     })
-
-
+  
+  
   hero.onCollide("portal", (portal) => {
     level_id++
+    
+    
     if (level_id < maps.length){
+      
       go('game',{level_id})
     }else{
       go('win')
     }
     
   })
+
 
   
   
@@ -227,7 +231,7 @@ scene("game", ({level_id}) => {
       "m         H        m",
       "m         H        m",
       "m         H        m",
-      "m         H        m",
+      "m         H   ---     m",
       "m         H        m",
       "mfffff   fH       fm",
       "m         H        m",
@@ -247,7 +251,7 @@ scene("game", ({level_id}) => {
       [
       "ffffffffffffffffffffffffffffffffffffffffff",
       "m         H                              m",
-      "m         H                              m",
+      "m         H    ---                          m",
       "m         H                              m",
       "m         H                              m",
       "m         H                              m",
@@ -266,11 +270,80 @@ scene("game", ({level_id}) => {
       "m         H       pm",
       "ffffffffffffffffffff"
       ],
+    
+      [
+        "ffffffffffffffffffffffffffffffffffffffffff",
+        "m         H                              m",
+        "m         H    ---                          m",
+        "m         H                              m",
+        "m         H                              m",
+        "m         H                              m",
+        "mfffff   fH                             fm",
+        "m         H                      m",
+        "m                  m",
+        "m         H        m",
+        "m         H        m",
+        "m         H        m",
+        "m         H       om",
+        "mwwww           fffm",
+        "mfffffffff         m",
+        "m         H        m",
+        "m         H        m",
+        "m         H        m",
+        "m         H       pm",
+        "ffffffffffffffffffff"
+        ],
+      [
+        "ffffffffffffffffffffffffffffffffffffffffff",
+        "m         H                              m",
+        "m         H    ---                          m",
+        "m         H                              m",
+        "m         H                              m",
+        "m         H                              m",
+        "mfffff   fH                             fm",
+        "m         H                      m",
+        "m                  m",
+        "m         H        m",
+        "m         H        m",
+        "m         H        m",
+        "m         H       om",
+        "mwwww           fffm",
+        "mfffffffff         m",
+        "m         H        m",
+        "m         H        m",
+        "m         H        m",
+        "m         H       pm",
+        "ffffffffffffffffffff"
+        ],
+        [
+        "ffffffffffffffffffffffffffffffffffffffffff",
+        "m         H                              m",
+        "m         H    ---                          m",
+        "m         H                              m",
+        "m         H                              m",
+        "m         H                              m",
+        "mfffff   fH                             fm",
+        "m         H                      m",
+        "m                  m",
+        "m         H        m",
+        "m         H        m",
+        "m         H        m",
+        "m         H       om",
+        "mwwww           fffm",
+        "mfffffffff         m",
+        "m         H        m",
+        "m         H        m",
+        "m         H        m",
+        "m         H       pm",
+        "ffffffffffffffffffff"
+        ],
+      
     ]
   
   current_map = maps[level_id]
+  let enemies = ['imbirwar2','lassie','halaraptor','piripiripyro', 'lassiedragon','kapsaicine']
 
-  const levelcfg = {
+  let levelcfg = {
     width:64,//width of all of the sprites on map  
     height:64,
     pos:vec2(0,0),
