@@ -168,7 +168,7 @@ scene("game", ({level_id}) => {
     let laser = add([
   	// list of components
   	  sprite("anisebullet"),
-      scale(0.18),
+      //scale(0.18),
   	  pos(projector.pos.x, projector.pos.y),
       origin("center"),
   	  area(scale(0.5)),//{
@@ -617,6 +617,7 @@ scene("game", ({level_id}) => {
     weapon.destroy()
     projector.opacity = 1
     //laser.use(sprite(''))
+    debug.log('t to shoot')
     
 	})
   hero.onCollide("husaria_armor", (husaria) => {

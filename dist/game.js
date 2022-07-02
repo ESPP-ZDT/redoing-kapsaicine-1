@@ -3201,7 +3201,6 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       play("bullet shoot");
       let laser = add([
         sprite("anisebullet"),
-        scale(0.18),
         pos(projector.pos.x, projector.pos.y),
         origin("center"),
         area(scale(0.5)),
@@ -3575,6 +3574,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       play("clove king");
       weapon2.destroy();
       projector.opacity = 1;
+      debug.log("t to shoot");
     });
     hero.onCollide("husaria_armor", (husaria) => {
       armor.use(sprite("husaria"));
