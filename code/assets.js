@@ -1,10 +1,5 @@
 export default function loadAssets() {
 	loadSprite("bean", "sprites/bean.png");
-	loadSprite("ghosty", "sprites/ghosty.png");
-	loadSprite("spike", "sprites/spike.png");
-	loadSprite("grass", "sprites/grass.png");
-	loadSprite("prize", "sprites/jumpy.png");
-	loadSprite("apple", "sprites/apple.png");
 	loadSprite("portal", "sprites/portal.png");
 	loadSprite("coin", "sprites/coin.png");
 	loadSound("coin", "sounds/score.mp3");
@@ -99,6 +94,7 @@ loadSprite("lassie dragon", "sprites/lassie dragon.png");
 loadSprite("rewolwer", "sprites/rewolwer.png");
 
 //essentials
+loadSprite("hotone", "sprites/hotone.png");//enemy bullet sprite
 
 }
 

@@ -14,7 +14,13 @@ kaboom({
   scale: 1.3
 });
 
+
 loadAssets()
+
+const music = play('wuja theme', {
+	loop: true,
+  volume: 0.1
+})
 //play('wuja theme')
 let level_id = 0
 const HERO_SPEED = 300 //hero movement speed variable
@@ -474,7 +480,8 @@ scene('game', ({level_id}) => {
   		add([
   			pos(mob.pos),
   			move(dir, BULLET_SPEED),
-  			rect(12, 12),
+        sprite('hotone'),
+        scale(0.13),
   			area(),
   			cleanup(),
   			origin('center'),
@@ -530,9 +537,13 @@ scene('game', ({level_id}) => {
     health_label.text = `Hero health: ${hero.hp()}`
     debug.log('hero health' +hero.hp())
     go('lose')
-    //burp()
-    
 	})
+  hero.onCollide('bullet', () => {
+    
+
+    go('lose')
+	})
+  
   hero.onCollide('character', (ch) => {
 		dialog.say(ch.msg)
     console.log('colliding')

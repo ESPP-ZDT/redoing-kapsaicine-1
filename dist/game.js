@@ -3070,11 +3070,6 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
   // code/assets.js
   function loadAssets() {
     loadSprite("bean", "sprites/bean.png");
-    loadSprite("ghosty", "sprites/ghosty.png");
-    loadSprite("spike", "sprites/spike.png");
-    loadSprite("grass", "sprites/grass.png");
-    loadSprite("prize", "sprites/jumpy.png");
-    loadSprite("apple", "sprites/apple.png");
     loadSprite("portal", "sprites/portal.png");
     loadSprite("coin", "sprites/coin.png");
     loadSound("coin", "sounds/score.mp3");
@@ -3139,6 +3134,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     loadSprite("kapsbg", "sprites/kapsbg.png");
     loadSprite("lassie dragon", "sprites/lassie dragon.png");
     loadSprite("rewolwer", "sprites/rewolwer.png");
+    loadSprite("hotone", "sprites/hotone.png");
   }
   __name(loadAssets, "loadAssets");
 
@@ -3236,6 +3232,10 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     scale: 1.3
   });
   loadAssets();
+  var music = play("wuja theme", {
+    loop: true,
+    volume: 0.1
+  });
   var level_id = 0;
   var HERO_SPEED = 300;
   var JUMP_SPEED = 600;
@@ -3613,7 +3613,8 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
           add([
             pos(mob.pos),
             move(dir, BULLET_SPEED),
-            rect(12, 12),
+            sprite("hotone"),
+            scale(0.13),
             area(),
             cleanup(),
             origin("center"),
