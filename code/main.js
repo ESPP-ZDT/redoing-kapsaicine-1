@@ -384,7 +384,6 @@ scene('game', ({level_id}) => {
   		area(),
   		origin('center'),
   		'bean',
-    
   	  ],
     //NPCS
     's': () =>[
@@ -399,35 +398,34 @@ scene('game', ({level_id}) => {
         'sergeant',
         z(60),
         scale(0.09),
-    
       ],
-    "o": () => [
-  		sprite("monk"),
+    'o': () => [
+  		sprite('monk'),
   		area(),
-  		origin("center"),
+  		origin('center'),
   		'monk','halapeno',
       scale(0.07),
   	  ],
-    "u": () => [
-  		sprite("healer"),
+    'u': () => [
+  		sprite('healer'),
   		area(),
-  		origin("center"),
+  		origin('center'),
   		'ultrahero','healer',
       scale(0.23),
   	  ],
     //ITEMS
-    "e": () => [
-  		sprite("projector"),
+    'e': () => [
+  		sprite('projector'),
   		area(),
-  		origin("center"),
+  		origin('center'),
   	'weapon1',
       scale(0.03),
       
   	  ],
-    "*": () => [
-  		sprite("husaria"),
+    '*': () => [
+  		sprite('husaria'),
   		area(),
-  		origin("center"),
+  		origin('center'),
   	'husaria_armor',
       scale(0.03),
   	  ],
@@ -443,7 +441,7 @@ scene('game', ({level_id}) => {
           scale(char.scale),
 					// here
 					//scale(char.scale),
-					"character",
+					'character',
 					{ msg: char.msg, },
 				]
 			}
