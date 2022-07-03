@@ -524,21 +524,21 @@ scene("game", ({level_id}) => {
   }
   const game_level = addLevel(current_map, levelcfg)
   
- let dragon = [get("dragon")[0],get("dragon")[1],get("dragon")[2]]
+ let dragon = [get('dragon')[0],get('dragon')[1],get('dragon')[2]]
   // Run the callback once every time we enter "idle" state.
 // Here we stay "idle" for 0.5 second, then enter "attack" state.
   dragon.forEach(mob =>{
-    mob.onStateEnter("idle", async () => {
+    mob.onStateEnter('idle', async () => {
   	await wait(0.5)
-  	mob.enterState("attack")
+  	mob.enterState('attack')
   })
-    mob.onCollide("mobcollider1", (collider) => {
+    mob.onCollide('mobcollider1', (collider) => {
 		  collider.destroy()
-      mob.use(sprite("lassie"))
+      mob.use(sprite('lassie'))
     
 	})
   // When we enter "attack" state, we fire a bullet, and enter "move" state after 1 sec
-  mob.onStateEnter("attack", async () => {
+  mob.onStateEnter('attack', async () => {
   
   	// Don't do anything if player doesn't exist anymore
   	if (hero.exists()) {
@@ -551,32 +551,32 @@ scene("game", ({level_id}) => {
   			rect(12, 12),
   			area(),
   			cleanup(),
-  			origin("center"),
+  			origin('center'),
   			color(BLUE),
-  			"bullet",
+  			'bullet',
   		])
   
   	}
   
   	await wait(1)
-  	mob.enterState("move")
+  	mob.enterState('move')
   
   })
   
-  mob.onStateEnter("move", async () => {
+  mob.onStateEnter('move', async () => {
   	await wait(2)
-  	mob.enterState("idle")
+  	mob.enterState('idle')
   })
   
   // Like .onUpdate() which runs every frame, but only runs when the current state is "move"
   // Here we move towards the player every frame if the current state is "move"
-  mob.onStateUpdate("move", () => {
+  mob.onStateUpdate('move', () => {
   	if (!hero.exists()) return
   	const dir = hero.pos.sub(mob.pos).unit()
   	mob.move(dir.scale(DRAGON_SPEED))
     })
   // Have to manually call enterState() to trigger the onStateEnter("move") event we defined above.
-  mob.enterState("move")
+  mob.enterState('move')
     
     
   })
