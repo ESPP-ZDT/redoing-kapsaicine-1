@@ -103,22 +103,19 @@ scene('game', ({level_id}) => {
 		})
     onKeyPress(dir.RIGHT, () => {
 			dialog.dismiss()
-      
 		})
     onKeyPress(dir.UP, () => {
 			dialog.dismiss()
 		})
     onKeyPress(dir.DOWN, () => {
 			dialog.dismiss()
-      
 		})
-    
 		onKeyDown(dir, () => {
 			hero.move(dirs[dir].scale(HERO_SPEED))
 		})
 	}
 
-  onKeyPress("space", () => {
+  onKeyPress('space', () => {
 		// these 2 functions are provided by body() component
         if (hero.isClimbing) {
             hero.use(body())
@@ -131,8 +128,6 @@ scene('game', ({level_id}) => {
             hero.isClimbing = false
             // return
         }
-    //burp()
-
 	})
   
   onKeyDown('right', () => {
@@ -162,8 +157,6 @@ scene('game', ({level_id}) => {
     hero.weight = 3
     projector.angle = 180
 
-  
-    
   });
   onKeyRelease('down', () => {
     hero.weight = 1
@@ -180,16 +173,15 @@ scene('game', ({level_id}) => {
             }
         })
 
-
-  onKeyPress("t", ()=>{
+  onKeyPress('t', ()=>{
     play('bullet shoot')
 
     let laser = add([
   	// list of components
-  	  sprite("anisebullet"),
+  	  sprite('anisebullet'),
       scale(0.18),
   	  pos(projector.pos.x, projector.pos.y),
-      origin("center"),
+      origin('center'),
   	  area(scale(0.5)),//{
         //width:30,
         //height: 30
@@ -207,7 +199,7 @@ scene('game', ({level_id}) => {
   //LADDER ON UPDATE
   hero.onUpdate(() => {
         // debug.log(player.weight)
-        const ladders = get("ladder")
+        const ladders = get('ladder')
         hero.touchingLadder = false
         for (const ladder of ladders) {
             if (hero.isColliding(ladder)) {
@@ -222,23 +214,15 @@ scene('game', ({level_id}) => {
     })
   
   
-  hero.onCollide("portal", (portal) => {
+  hero.onCollide('portal', (portal) => {
     level_id++
     
-
-    
-    if (level_id < maps.length){
-      
+    if (level_id < maps.length){  
       go('game',{level_id})
     }else{
       go('win')
     }
-    
   })
-
-
-  //collider 1 = !
-  
   
   current_map = maps[level_id]
   //let enemies = ['imbirwar2','lassie','halaraptor','piripiripyro', 'lassiedragon','kapsaicine']
@@ -251,14 +235,14 @@ scene('game', ({level_id}) => {
     
     '-': () =>[
       //AI ENEMY
-      sprite("dragon1"),
+      sprite('dragon1'),
       pos(),
-	    origin("center"),
+	    origin('center'),
       area(),
       'dragon',
       scale(0.13),
 	// This enemy cycle between 3 states, and start from "idle" state
-	    state("move", [ "idle", "attack", "move", ]),
+	    state('move', [ 'idle', 'attack', 'move', ]),
       ],
     //level 1 and  2 tiles
     'm': () =>[
@@ -288,61 +272,7 @@ scene('game', ({level_id}) => {
         scale(0.07)
       ],
     '0': () =>[
-      sprite('desflor1'),//floor sprite
-        'floor',
-        area(scale(1,0.5)),
-        solid(),
-        z(2),
-        scale(0.07),
-        origin('center')
-      ],
-    '9': () =>[
-      sprite('desflor2'),//floor sprite
-        'floor',
-        area(scale(1,0.5)),
-        solid(),
-        z(2),
-        scale(0.07),
-        origin('center')
-      ],
-    '8': () =>[
       sprite('desflor3'),//floor sprite
-        'floor',
-        area(scale(1,0.5)),
-        solid(),
-        z(2),
-        scale(0.07),
-        origin('center')
-      ],
-    '7': () =>[
-      sprite('desflor4'),//floor sprite
-        'floor',
-        area(scale(1,0.5)),
-        solid(),
-        z(2),
-        scale(0.07),
-        origin('center')
-      ],
-    '+': () =>[
-      sprite('dstile1'),//floor sprite
-        'floor',
-        area(scale(1,0.5)),
-        solid(),
-        z(2),
-        scale(0.07),
-        origin('center')
-      ],
-    '>': () =>[
-      sprite('dstile2'),//floor sprite
-        'floor',
-        area(scale(1,0.5)),
-        solid(),
-        z(2),
-        scale(0.07),
-        origin('center')
-      ],
-    '.': () =>[
-      sprite('dstile3'),//floor sprite
         'floor',
         area(scale(1,0.5)),
         solid(),
