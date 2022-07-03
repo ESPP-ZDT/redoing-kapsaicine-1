@@ -3110,8 +3110,8 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     loadSound("clove king", "sounds/clove king.mp3");
     loadSprite("halaraptor", "sprites/halaraptor.png");
     loadSprite("kapsaicine", "sprites/kapsaicine.png");
+    loadSprite("imbirwar1", "sprites/imbirwar1.png");
     loadSprite("imbirwar2", "sprites/imbirwar2.png");
-    loadSprite("lassie dragon", "sprites/lassie dragon.png");
     loadSprite("lassie", "sprites/lassie.png");
     loadSprite("piripiripyro", "sprites/piripiripyro.png");
     loadSprite("dragon1", "sprites/1654912978244.png");
@@ -3120,6 +3120,25 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     loadSprite("mobcol1", "sprites/1654823279087.png");
     loadSprite("husaria", "sprites/husaria.png");
     loadSprite("anisebullet", "sprites/anisebullet.png");
+    loadSprite("desflor1", "sprites/desflor1.png");
+    loadSprite("desflor2", "sprites/desflor2.png");
+    loadSprite("desflor3", "sprites/desflor3.png");
+    loadSprite("desflor4", "sprites/desertfloor.png");
+    loadSprite("deswall", "sprites/deswall.png");
+    loadSprite("dstile1", "sprites/dstile1.png");
+    loadSprite("dstile2", "sprites/dstile2.png");
+    loadSprite("dstile3", "sprites/dstile3.png");
+    loadSprite("halawall", "sprites/halawall.png");
+    loadSprite("halafloor", "sprites/halafloor.png");
+    loadSprite("papriawall", "sprites/papriawall.png");
+    loadSprite("papriafloor", "sprites/papriafloor.png");
+    loadSprite("papriatile", "sprites/papriatile.png");
+    loadSprite("bckg1", "sprites/bckg1.png");
+    loadSprite("desert", "sprites/desert.png");
+    loadSprite("sanctuary", "sprites/sanctuary.png");
+    loadSprite("kapsbg", "sprites/kapsbg.png");
+    loadSprite("lassie dragon", "sprites/lassie dragon.png");
+    loadSprite("rewolwer", "sprites/rewolwer.png");
   }
   __name(loadAssets, "loadAssets");
 
@@ -3217,7 +3236,6 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     scale: 1.3
   });
   loadAssets();
-  play("wuja theme");
   var level_id = 0;
   var HERO_SPEED = 300;
   var JUMP_SPEED = 600;
@@ -3225,6 +3243,19 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
   var BULLET_SPEED = 800;
   scene("game", ({ level_id: level_id2 }) => {
     gravity(1600);
+    let background1 = add([
+      sprite("bckg1"),
+      opacity(1),
+      scale(30),
+      origin("center"),
+      z(0)
+    ]);
+    let background2 = add([
+      sprite("desert"),
+      opacity(1),
+      scale(2),
+      z(0)
+    ]);
     const hero = add([
       sprite("hero"),
       pos(width() / 2, height() / 2),
@@ -3245,7 +3276,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       scale(0.01),
       follow(hero, vec2(0, -17)),
       z(21),
-      opacity(0)
+      opacity(1)
     ]);
     const armor = add([
       pos(),
@@ -3338,9 +3369,11 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       play("bullet shoot");
       let laser = add([
         sprite("anisebullet"),
+        scale(0.18),
         pos(projector.pos.x, projector.pos.y),
         origin("center"),
         area(scale(0.5)),
+        z(100),
         move(projector.angle - 90, 500),
         cleanup(),
         "laser"
@@ -3388,6 +3421,133 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       ],
       "f": () => [
         sprite("clovefloor"),
+        "floor",
+        area(scale(1, 0.5)),
+        solid(),
+        z(2),
+        scale(0.07),
+        origin("center")
+      ],
+      "&": () => [
+        sprite("deswall"),
+        "wall",
+        area(),
+        solid(),
+        scale(0.07)
+      ],
+      "0": () => [
+        sprite("desflor1"),
+        "floor",
+        area(scale(1, 0.5)),
+        solid(),
+        z(2),
+        scale(0.07),
+        origin("center")
+      ],
+      "9": () => [
+        sprite("desflor2"),
+        "floor",
+        area(scale(1, 0.5)),
+        solid(),
+        z(2),
+        scale(0.07),
+        origin("center")
+      ],
+      "8": () => [
+        sprite("desflor3"),
+        "floor",
+        area(scale(1, 0.5)),
+        solid(),
+        z(2),
+        scale(0.07),
+        origin("center")
+      ],
+      "7": () => [
+        sprite("desflor4"),
+        "floor",
+        area(scale(1, 0.5)),
+        solid(),
+        z(2),
+        scale(0.07),
+        origin("center")
+      ],
+      "+": () => [
+        sprite("dstile1"),
+        "floor",
+        area(scale(1, 0.5)),
+        solid(),
+        z(2),
+        scale(0.07),
+        origin("center")
+      ],
+      ">": () => [
+        sprite("dstile2"),
+        "floor",
+        area(scale(1, 0.5)),
+        solid(),
+        z(2),
+        scale(0.07),
+        origin("center")
+      ],
+      ".": () => [
+        sprite("dstile3"),
+        "floor",
+        area(scale(1, 0.5)),
+        solid(),
+        z(2),
+        scale(0.07),
+        origin("center")
+      ],
+      "|": () => [
+        sprite("halawall"),
+        "wall",
+        area(),
+        solid(),
+        scale(0.07)
+      ],
+      "%": () => [
+        sprite("halafloor"),
+        "floor",
+        area(scale(1, 0.5)),
+        solid(),
+        z(2),
+        scale(0.07),
+        origin("center")
+      ],
+      "5": () => [
+        sprite("papriawall"),
+        "wall",
+        area(),
+        solid(),
+        scale(0.07)
+      ],
+      "4": () => [
+        sprite("papriafloor"),
+        "floor",
+        area(scale(1, 0.5)),
+        solid(),
+        z(2),
+        scale(0.07),
+        origin("center")
+      ],
+      "3": () => [
+        sprite("papriatile"),
+        "floor",
+        area(scale(1, 0.5)),
+        solid(),
+        z(2),
+        scale(0.07),
+        origin("center")
+      ],
+      "2": () => [
+        sprite("capswall"),
+        "wall",
+        area(),
+        solid(),
+        scale(0.07)
+      ],
+      "@": () => [
+        sprite("capstile"),
         "floor",
         area(scale(1, 0.5)),
         solid(),
@@ -3443,7 +3603,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       "l": () => [
         sprite("sergeant"),
         "sergeant",
-        z(17),
+        z(60),
         scale(0.09)
       ],
       "o": () => [
@@ -3532,14 +3692,14 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     });
     const dialog = addDialog();
     const level_label = add([
-      text("level " + level_id2),
+      text("kapsaicine "),
       pos(0, 0),
       scale(0.3),
       fixed(),
       z(17)
     ]);
     const health_label = add([
-      text("health " + hero.hp()),
+      text("Hero health: " + hero.hp()),
       pos(400, 0),
       scale(0.3),
       fixed(),
@@ -3591,6 +3751,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     });
     onCollide("laser", "dragon", (laser, enemy) => {
       enemy.destroy();
+      enemy.enterState("idle");
       play("monster death 1");
       laser.destroy();
     });

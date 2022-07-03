@@ -1,10 +1,10 @@
 import maps from './maps'
-import weapon from "./weapon"
-import kaboom from "kaboom"
-import loadAssets from "./assets"
+import weapon from './weapon'
+import kaboom from 'kaboom'
+import loadAssets from './assets'
 import {addDialog} from './adddialog.js'
 import characters from './npcs'
-import patrol from "./patrol"
+import patrol from './patrol'
 
 
 kaboom({
@@ -15,7 +15,7 @@ kaboom({
 });
 
 loadAssets()
-play('wuja theme')
+//play('wuja theme')
 let level_id = 0
 const HERO_SPEED = 300 //hero movement speed variable
 const JUMP_SPEED = 600 //hero movement speed variable
@@ -24,6 +24,23 @@ const BULLET_SPEED = 800
 
 scene("game", ({level_id}) => {
   gravity(1600)
+  let background1 =
+  add([
+    sprite("bckg1"),
+    opacity(1),
+    scale(30),
+    origin('center'),
+    //layer("bg")
+    z(0),
+  ]);
+  let background2 =
+  add([
+    sprite("desert"),
+    opacity(1),
+    scale(2),
+    //layer("bg")
+    z(0),
+  ]);
     
   const hero = add([
     sprite('hero'),
@@ -48,7 +65,7 @@ scene("game", ({level_id}) => {
     //health(1000),
   	follow(hero, vec2(0, -17)),
     z(21),
-    opacity(0)
+    opacity(1)
   ])
   const armor = add([
   	pos(),
@@ -170,12 +187,13 @@ scene("game", ({level_id}) => {
     let laser = add([
   	// list of components
   	  sprite("anisebullet"),
-      //scale(0.18),
+      scale(0.18),
   	  pos(projector.pos.x, projector.pos.y),
       origin("center"),
   	  area(scale(0.5)),//{
         //width:30,
         //height: 30
+      z(100),
       
       move(projector.angle-90, 500),
       cleanup(),
@@ -229,7 +247,10 @@ scene("game", ({level_id}) => {
     width:64,//width of all of the sprites on map  
     height:64,
     pos:vec2(0,0),
+
+    
     '-': () =>[
+      //AI ENEMY
       sprite("dragon1"),
       pos(),
 	    origin("center"),
@@ -239,8 +260,9 @@ scene("game", ({level_id}) => {
 	// This enemy cycle between 3 states, and start from "idle" state
 	    state("move", [ "idle", "attack", "move", ]),
       ],
-    
+    //level 1 and  2 tiles
     'm': () =>[
+      //level tile  
       sprite('clovewall'),//wall sprite
         'wall',
         area(),
@@ -255,8 +277,145 @@ scene("game", ({level_id}) => {
         z(2),
         scale(0.07),
         origin('center')
-      
       ],
+    //paprika desert tiles
+    '&': () =>[
+      //level tile  
+      sprite('deswall'),//wall sprite
+        'wall',
+        area(),
+        solid(),
+        scale(0.07)
+      ],
+    '0': () =>[
+      sprite('desflor1'),//floor sprite
+        'floor',
+        area(scale(1,0.5)),
+        solid(),
+        z(2),
+        scale(0.07),
+        origin('center')
+      ],
+    '9': () =>[
+      sprite('desflor2'),//floor sprite
+        'floor',
+        area(scale(1,0.5)),
+        solid(),
+        z(2),
+        scale(0.07),
+        origin('center')
+      ],
+    '8': () =>[
+      sprite('desflor3'),//floor sprite
+        'floor',
+        area(scale(1,0.5)),
+        solid(),
+        z(2),
+        scale(0.07),
+        origin('center')
+      ],
+    '7': () =>[
+      sprite('desflor4'),//floor sprite
+        'floor',
+        area(scale(1,0.5)),
+        solid(),
+        z(2),
+        scale(0.07),
+        origin('center')
+      ],
+    '+': () =>[
+      sprite('dstile1'),//floor sprite
+        'floor',
+        area(scale(1,0.5)),
+        solid(),
+        z(2),
+        scale(0.07),
+        origin('center')
+      ],
+    '>': () =>[
+      sprite('dstile2'),//floor sprite
+        'floor',
+        area(scale(1,0.5)),
+        solid(),
+        z(2),
+        scale(0.07),
+        origin('center')
+      ],
+    '.': () =>[
+      sprite('dstile3'),//floor sprite
+        'floor',
+        area(scale(1,0.5)),
+        solid(),
+        z(2),
+        scale(0.07),
+        origin('center')
+      ],
+     //halapeno sanctuary tiles
+    '|': () =>[
+      //level tile  
+      sprite('halawall'),//wall sprite
+        'wall',
+        area(),
+        solid(),
+        scale(0.07)
+      ],
+    '%': () =>[
+      sprite('halafloor'),//floor sprite
+        'floor',
+        area(scale(1,0.5)),
+        solid(),
+        z(2),
+        scale(0.07),
+        origin('center')
+      ],
+       //paprialand/pipipipiri tiles
+    '5': () =>[
+      //level tile  
+      sprite('papriawall'),//wall sprite
+        'wall',
+        area(),
+        solid(),
+        scale(0.07)
+      ],
+    '4': () =>[
+      sprite('papriafloor'),//floor sprite
+        'floor',
+        area(scale(1,0.5)),
+        solid(),
+        z(2),
+        scale(0.07),
+        origin('center')
+      ],
+    '3': () =>[
+      sprite('papriatile'),//floor sprite
+        'floor',
+        area(scale(1,0.5)),
+        solid(),
+        z(2),
+        scale(0.07),
+        origin('center')
+      ],
+    //chemical kapsaicine tiles
+    '2': () =>[
+      //level tile  
+      sprite('capswall'),//wall sprite
+        'wall',
+        area(),
+        solid(),
+        scale(0.07)
+      ],
+        
+    '@': () =>[
+      sprite('capstile'),//floor sprite
+        'floor',
+        area(scale(1,0.5)),
+        solid(),
+        z(2),
+        scale(0.07),
+        origin('center')
+      ],
+      
+    //MOB COLLIDERS
     '$': () =>[
       sprite('mobcol1'),//floor sprite
         'mobcollider1',
@@ -267,6 +426,7 @@ scene("game", ({level_id}) => {
         origin('center')
       
       ],
+    //END OF LEVEL
     'p': () =>[
       sprite('portal'),
         'portal',
@@ -274,6 +434,7 @@ scene("game", ({level_id}) => {
         scale(0.07),
         area(),
       ],
+    //DRABINY
     "H": () => [
   		sprite("ladder"),
   		area(),
@@ -281,6 +442,7 @@ scene("game", ({level_id}) => {
   		"ladder",
       scale(0.07),
   	  ],
+    //SHITTY MONSTERS
     "w": () => [
   		sprite("paprikawraith"),
   		area(),
@@ -296,6 +458,7 @@ scene("game", ({level_id}) => {
   		'bean',
     
   	  ],
+    //NPCS
     's': () =>[
       sprite('spicelord1'),
         'spicelord1',
@@ -306,7 +469,7 @@ scene("game", ({level_id}) => {
     'l': () =>[
       sprite('sergeant'),
         'sergeant',
-        z(17),
+        z(60),
         scale(0.09),
     
       ],
@@ -324,12 +487,14 @@ scene("game", ({level_id}) => {
   		'ultrahero','healer',
       scale(0.23),
   	  ],
+    //ITEMS
     "e": () => [
   		sprite("projector"),
   		area(),
   		origin("center"),
   	'weapon1',
       scale(0.03),
+      
   	  ],
     "*": () => [
   		sprite("husaria"),
@@ -339,7 +504,7 @@ scene("game", ({level_id}) => {
       scale(0.03),
   	  ],
     
-    
+    //DIALOG NPCS
     any(ch) {
 			const char = characters[ch]
 			if (char) {
@@ -423,14 +588,14 @@ scene("game", ({level_id}) => {
   
   const dialog = addDialog()
   const level_label = add([
-    text('level ' + level_id),
+    text('kapsaicine '),
     pos(0,0),
     scale(0.3),
     fixed(),
     z(17),
   ])
   const health_label = add([
-    text('health ' + hero.hp()),
+    text('Hero health: ' + hero.hp()),
     pos(400,0),
     scale(0.3),
     fixed(),
@@ -501,6 +666,9 @@ scene("game", ({level_id}) => {
 })
   onCollide("laser","dragon", (laser, enemy) =>{
   enemy.destroy()
+  
+  enemy.enterState("idle")
+  
   play('monster death 1')
   laser.destroy()
 })

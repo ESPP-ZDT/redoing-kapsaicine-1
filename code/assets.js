@@ -50,11 +50,12 @@ loadSound("halape", "sounds/halapeno monk.mp3");
 loadSprite("healer", "sprites/1653836481981.png");
 loadSound("healer hero", "sounds/healer hero.mp3");
 loadSound("clove king", "sounds/clove king.mp3");
-  
+//enemies
 loadSprite("halaraptor", "sprites/halaraptor.png");
 loadSprite("kapsaicine", "sprites/kapsaicine.png");
+loadSprite("imbirwar1", "sprites/imbirwar1.png");
 loadSprite("imbirwar2", "sprites/imbirwar2.png");
-loadSprite("lassie dragon", "sprites/lassie dragon.png");
+
 loadSprite("lassie", "sprites/lassie.png");
 loadSprite("piripiripyro", "sprites/piripiripyro.png");
   
@@ -64,6 +65,41 @@ loadSprite("armor2", "sprites/1654823434109.png");
 loadSprite("mobcol1", "sprites/1654823279087.png");
 loadSprite("husaria", "sprites/husaria.png");
 loadSprite("anisebullet", "sprites/anisebullet.png");
+//paprika desert tiles
+  
+loadSprite("desflor1", "sprites/desflor1.png");
+loadSprite("desflor2", "sprites/desflor2.png");
+loadSprite("desflor3", "sprites/desflor3.png");
+loadSprite("desflor4", "sprites/desertfloor.png");
+loadSprite("deswall", "sprites/deswall.png");
+loadSprite("dstile1", "sprites/dstile1.png");
+loadSprite("dstile2", "sprites/dstile2.png");
+loadSprite("dstile3", "sprites/dstile3.png");
+  
+
+  //halapeno sanctuary tiles
+loadSprite("halawall", "sprites/halawall.png");
+loadSprite("halafloor", "sprites/halafloor.png");
+
+//piripiripaprialand tiles
+loadSprite("papriawall", "sprites/papriawall.png");
+loadSprite("papriafloor", "sprites/papriafloor.png");
+loadSprite("papriatile", "sprites/papriatile.png");
+//BACKGROUNDS
+  
+loadSprite("bckg1", "sprites/bckg1.png");//clovekingdom background
+loadSprite("desert", "sprites/desert.png");
+loadSprite("sanctuary", "sprites/sanctuary.png");
+loadSprite("kapsbg", "sprites/kapsbg.png");
+
+
+  
+//paprika desert enemies
+loadSprite("lassie dragon", "sprites/lassie dragon.png");
+loadSprite("rewolwer", "sprites/rewolwer.png");
+
+//essentials
+
 }
 
 

@@ -1,4 +1,5 @@
 const maps = [
+  //CLOVEKINGDOM1
       [
       "fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
       "m      H  mm                                                                                                 m",
@@ -21,6 +22,7 @@ const maps = [
       "m a d* H      p                                                                                      m",
       "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
       ],
+  //CLOVEKINGDOM2
       [
       "fffffffffffffffffffff",
       "m         H        m",
@@ -43,6 +45,7 @@ const maps = [
       "m         H       pm",
       "ffffffffffffffffffff"
       ],
+  //PAPRIKADESERT
       [
       "ffffffffffffffffffffffffffffffffffffffffff",
       "m         H                              m",
@@ -65,7 +68,7 @@ const maps = [
       "m         H       pm",
       "ffffffffffffffffffff"
       ],
-    
+    //HALAPENO SANCTUARY
       [
         "ffffffffffffffffffffffffffffffffffffffffff",
         "m         H                              m",
@@ -88,6 +91,7 @@ const maps = [
         "m         H       pm",
         "ffffffffffffffffffff"
         ],
+  //PAPRIALAND
       [
         "ffffffffffffffffffffffffffffffffffffffffff",
         "m         H                              m",
@@ -110,6 +114,7 @@ const maps = [
         "m         H       pm",
         "ffffffffffffffffffff"
         ],
+  //CHEMICAL KAPSAICINE
         [
         "ffffffffffffffffffffffffffffffffffffffffff",
         "m         H                              m",
