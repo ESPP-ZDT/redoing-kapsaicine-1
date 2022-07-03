@@ -6,7 +6,6 @@ import {addDialog} from './adddialog.js'
 import characters from './npcs'
 import patrol from './patrol'
 
-
 kaboom({
   background: [255, 250, 205],
   width: 800,
@@ -22,20 +21,21 @@ const JUMP_SPEED = 600 //hero movement speed variable
 const DRAGON_SPEED = 100
 const BULLET_SPEED = 800
 
-scene("game", ({level_id}) => {
+scene('game', ({level_id}) => {
   gravity(1600)
   let background1 =
   add([
-    sprite("bckg1"),
+    sprite('bckg1'),
     opacity(1),
     scale(30),
     origin('center'),
     //layer("bg")
     z(0),
   ]);
+  
   let background2 =
   add([
-    sprite("desert"),
+    sprite('desert'),
     opacity(1),
     scale(2),
     //layer("bg")
@@ -56,10 +56,11 @@ scene("game", ({level_id}) => {
     health(100)
     //body()
   ])
+  
   const projector = add([
   	pos(),
-  	sprite("projector"),
-  	origin("center"),
+  	sprite('projector'),
+  	origin('center'),
     //color(105,105,105),
     scale(0.01),
     //health(1000),
@@ -67,10 +68,11 @@ scene("game", ({level_id}) => {
     z(21),
     opacity(1)
   ])
+  
   const armor = add([
   	pos(),
-  	sprite("armor1"),
-  	origin("center"),
+  	sprite('armor1'),
+  	origin('center'),
     //color(105,105,105),
     scale(0.03),
     //health(1000),
@@ -79,8 +81,8 @@ scene("game", ({level_id}) => {
     opacity(1),
     color(255,255,255)
   ])
+
   
-  //projector.opacity = 0
   //HERO CAMERA AND DEATH
   hero.onUpdate(() =>{
     camPos(hero.pos)
@@ -90,27 +92,27 @@ scene("game", ({level_id}) => {
   })
   
   const dirs = {
-		"left": LEFT,
-		"right": RIGHT,
-		"up": UP,
-		"down": DOWN,
-    
+		'left': LEFT,
+		'right': RIGHT,
+		'up': UP,
+		'down': DOWN,
 	}
 
 	for (const dir in dirs) {
 		onKeyPress(dir.LEFT, () => {
 			dialog.dismiss()
 		})
+    
     onKeyPress(dir.RIGHT, () => {
 			dialog.dismiss()
-      
 		})
+    
     onKeyPress(dir.UP, () => {
 			dialog.dismiss()
 		})
+    
     onKeyPress(dir.DOWN, () => {
 			dialog.dismiss()
-      
 		})
     
 		onKeyDown(dir, () => {
@@ -118,7 +120,7 @@ scene("game", ({level_id}) => {
 		})
 	}
 
-  onKeyPress("space", () => {
+  onKeyPress('space', () => {
 		// these 2 functions are provided by body() component
         if (hero.isClimbing) {
             hero.use(body())
@@ -131,8 +133,6 @@ scene("game", ({level_id}) => {
             hero.isClimbing = false
             // return
         }
-    //burp()
-
 	})
   
   onKeyDown('right', () => {
@@ -144,8 +144,8 @@ scene("game", ({level_id}) => {
               hero.weight = 1
               hero.isClimbing = false
           }
-        
   });
+  
   onKeyDown('left', () => {
     projector.angle = 270
     hero.flipX(false)
@@ -161,53 +161,46 @@ scene("game", ({level_id}) => {
     hero.move(0, HERO_SPEED)
     hero.weight = 3
     projector.angle = 180
-
-  
-    
   });
+  
   onKeyRelease('down', () => {
-    hero.weight = 1
-    
+    hero.weight = 1  
   });
   
   onKeyDown('up', () => {
       projector.angle = 0
         if (hero.touchingLadder) {
                 hero.isClimbing = true
-                hero.unuse("body")
+                hero.unuse('body')
                 hero.move(0, -HERO_SPEED)
-                // player.weight = 0
             }
         })
 
-
-  onKeyPress("t", ()=>{
+  onKeyPress('t', ()=>{
     play('bullet shoot')
-
+    
     let laser = add([
   	// list of components
-  	  sprite("anisebullet"),
+  	  sprite('anisebullet'),
       scale(0.18),
   	  pos(projector.pos.x, projector.pos.y),
-      origin("center"),
+      origin('center'),
   	  area(scale(0.5)),//{
         //width:30,
         //height: 30
       z(100),
-      
       move(projector.angle-90, 500),
       cleanup(),
       'laser'
     ])
   
     laser.angle = projector.angle
-
 })
   
   //LADDER ON UPDATE
   hero.onUpdate(() => {
         // debug.log(player.weight)
-        const ladders = get("ladder")
+        const ladders = get('ladder')
         hero.touchingLadder = false
         for (const ladder of ladders) {
             if (hero.isColliding(ladder)) {
@@ -221,27 +214,17 @@ scene("game", ({level_id}) => {
         // }
     })
   
-  
-  hero.onCollide("portal", (portal) => {
+  hero.onCollide('portal', (portal) => {
     level_id++
-    
-
-    
     if (level_id < maps.length){
-      
       go('game',{level_id})
     }else{
       go('win')
     }
     
   })
-
-
-  //collider 1 = !
-  
   
   current_map = maps[level_id]
-  //let enemies = ['imbirwar2','lassie','halaraptor','piripiripyro', 'lassiedragon','kapsaicine']
 
   let levelcfg = {
     width:64,//width of all of the sprites on map  
@@ -251,14 +234,14 @@ scene("game", ({level_id}) => {
     
     '-': () =>[
       //AI ENEMY
-      sprite("dragon1"),
+      sprite('dragon1'),
       pos(),
-	    origin("center"),
+	    origin('center'),
       area(),
       'dragon',
       scale(0.13),
 	// This enemy cycle between 3 states, and start from "idle" state
-	    state("move", [ "idle", "attack", "move", ]),
+	    state('move', [ 'idle', 'attack', 'move', ]),
       ],
     //level 1 and  2 tiles
     'm': () =>[
@@ -288,61 +271,7 @@ scene("game", ({level_id}) => {
         scale(0.07)
       ],
     '0': () =>[
-      sprite('desflor1'),//floor sprite
-        'floor',
-        area(scale(1,0.5)),
-        solid(),
-        z(2),
-        scale(0.07),
-        origin('center')
-      ],
-    '9': () =>[
-      sprite('desflor2'),//floor sprite
-        'floor',
-        area(scale(1,0.5)),
-        solid(),
-        z(2),
-        scale(0.07),
-        origin('center')
-      ],
-    '8': () =>[
       sprite('desflor3'),//floor sprite
-        'floor',
-        area(scale(1,0.5)),
-        solid(),
-        z(2),
-        scale(0.07),
-        origin('center')
-      ],
-    '7': () =>[
-      sprite('desflor4'),//floor sprite
-        'floor',
-        area(scale(1,0.5)),
-        solid(),
-        z(2),
-        scale(0.07),
-        origin('center')
-      ],
-    '+': () =>[
-      sprite('dstile1'),//floor sprite
-        'floor',
-        area(scale(1,0.5)),
-        solid(),
-        z(2),
-        scale(0.07),
-        origin('center')
-      ],
-    '>': () =>[
-      sprite('dstile2'),//floor sprite
-        'floor',
-        area(scale(1,0.5)),
-        solid(),
-        z(2),
-        scale(0.07),
-        origin('center')
-      ],
-    '.': () =>[
-      sprite('dstile3'),//floor sprite
         'floor',
         area(scale(1,0.5)),
         solid(),
@@ -404,7 +333,6 @@ scene("game", ({level_id}) => {
         solid(),
         scale(0.07)
       ],
-        
     '@': () =>[
       sprite('capstile'),//floor sprite
         'floor',
@@ -414,7 +342,6 @@ scene("game", ({level_id}) => {
         scale(0.07),
         origin('center')
       ],
-      
     //MOB COLLIDERS
     '$': () =>[
       sprite('mobcol1'),//floor sprite
@@ -424,7 +351,6 @@ scene("game", ({level_id}) => {
         z(2),
         scale(0.10),
         origin('center')
-      
       ],
     //END OF LEVEL
     'p': () =>[
@@ -456,7 +382,6 @@ scene("game", ({level_id}) => {
   		area(),
   		origin("center"),
   		'bean',
-    
   	  ],
     //NPCS
     's': () =>[
@@ -471,7 +396,6 @@ scene("game", ({level_id}) => {
         'sergeant',
         z(60),
         scale(0.09),
-    
       ],
     "o": () => [
   		sprite("monk"),
@@ -514,31 +438,31 @@ scene("game", ({level_id}) => {
 					solid(),
           scale(char.scale),
 					// here
-					//scale(char.scale),
-					"character",
+					'character',
 					{ msg: char.msg, },
 				]
 			}
 		},
     
   }
-  const game_level = addLevel(current_map, levelcfg)
   
- let dragon = [get("dragon")[0],get("dragon")[1],get("dragon")[2]]
+  
+  //ENEMY AI LOGIC
+ let dragon = [get('dragon')[0],get('dragon')[1],get('dragon')[2]]
   // Run the callback once every time we enter "idle" state.
 // Here we stay "idle" for 0.5 second, then enter "attack" state.
   dragon.forEach(mob =>{
-    mob.onStateEnter("idle", async () => {
+    mob.onStateEnter('idle', async () => {
   	await wait(0.5)
-  	mob.enterState("attack")
+  	mob.enterState('attack')
   })
-    mob.onCollide("mobcollider1", (collider) => {
+    mob.onCollide('mobcollider1', (collider) => {
 		  collider.destroy()
-      mob.use(sprite("lassie"))
+      mob.use(sprite('lassie'))
     
 	})
   // When we enter "attack" state, we fire a bullet, and enter "move" state after 1 sec
-  mob.onStateEnter("attack", async () => {
+  mob.onStateEnter('attack', async () => {
   
   	// Don't do anything if player doesn't exist anymore
   	if (hero.exists()) {
@@ -551,40 +475,34 @@ scene("game", ({level_id}) => {
   			rect(12, 12),
   			area(),
   			cleanup(),
-  			origin("center"),
+  			origin('center'),
   			color(BLUE),
-  			"bullet",
+  			'bullet',
   		])
   
   	}
   
   	await wait(1)
-  	mob.enterState("move")
+  	mob.enterState('move')
   
   })
   
-  mob.onStateEnter("move", async () => {
+  mob.onStateEnter('move', async () => {
   	await wait(2)
-  	mob.enterState("idle")
+  	mob.enterState('idle')
   })
   
   // Like .onUpdate() which runs every frame, but only runs when the current state is "move"
   // Here we move towards the player every frame if the current state is "move"
-  mob.onStateUpdate("move", () => {
+  mob.onStateUpdate('move', () => {
   	if (!hero.exists()) return
   	const dir = hero.pos.sub(mob.pos).unit()
   	mob.move(dir.scale(DRAGON_SPEED))
     })
   // Have to manually call enterState() to trigger the onStateEnter("move") event we defined above.
-  mob.enterState("move")
-    
-    
+  mob.enterState('move')
+      
   })
-  
-
-  
-
-
   
   const dialog = addDialog()
   const level_label = add([
@@ -594,56 +512,48 @@ scene("game", ({level_id}) => {
     fixed(),
     z(17),
   ])
-  const health_label = add([
-    text('Hero health: ' + hero.hp()),
-    pos(400,0),
-    scale(0.3),
-    fixed(),
-    z(190)
-  ])
-  
+  //unused health label
+//  const health_label = add([
+  //  text('Hero health: ' + hero.hp()),
+  // pos(400,0),
+  // scale(0.3),
+  // fixed(),
+  //  z(190)
+  //])
 
-
-  hero.onCollide("dragon", () => {
-    //play('halape')
-		hero.hurt(100)
-   // health_label.text = health: ${hero.hp()}
-    health_label.text = `Hero health: ${hero.hp()}`
-    debug.log('hero health' +hero.hp())
+  //hero colliders
+  hero.onCollide('dragon', () => {
+		//hero.hurt(100)
+    //health_label.text = `Hero health: ${hero.hp()}`//unuseed
+    //debug.log('hero health' +hero.hp())//unused
     go('lose')
-    //burp()
-    
 	})
-  hero.onCollide("character", (ch) => {
+  hero.onCollide('character', (ch) => {
 		dialog.say(ch.msg)
     console.log('colliding')
 	})
-  hero.onCollide("monk", () => {
+  hero.onCollide('monk', () => {
     armor.use(sprite("mark"))
     play('halape')
-		hero.heal(100)
+		//hero.heal(100)
    // health_label.text = health: ${hero.hp()}
-    health_label.text = `Hero health: ${hero.hp()}`
-    debug.log('hero health' +hero.hp())
-    //burp()
-    
+    //health_label.text = `Hero health: ${hero.hp()}`
+    //debug.log('hero health' +hero.hp())
 	})
-  hero.onCollide("healer", () => {
+  hero.onCollide('healer', () => {
     play('healer hero')
 		hero.heal(100)
    // health_label.text = health: ${hero.hp()}
-    health_label.text = `Hero health: ${hero.hp()}`
+    //health_label.text = `Hero health: ${hero.hp()}`
     //debug.log('hero health' +hero.hp())
-    //burp()
-    
 	})
-  hero.onCollide("bean", () => {
+  hero.onCollide('bean', () => {
     burp()
 	})
-  hero.onCollide("spicelord1", () => {
+  hero.onCollide('spicelord1', () => {
     play('spicelord1sound')
 	})
-  hero.onCollide("weapon1", (weapon) => {
+  hero.onCollide('weapon1', (weapon) => {
     play('clove king')
     weapon.destroy()
     projector.opacity = 1
@@ -651,30 +561,27 @@ scene("game", ({level_id}) => {
     debug.log('t to shoot')
     
 	})
-  hero.onCollide("husaria_armor", (husaria) => {
+  hero.onCollide('husaria_armor', (husaria) => {
     //play('clove king')
     //laser.use(sprite("anisebullet"))
-    armor.use(sprite("husaria"))
+    armor.use(sprite('husaria'))
     husaria.destroy()
     armor.opacity = 1
     
 	})
-  onCollide("laser","enemy", (laser, enemy) =>{
+  onCollide('laser','enemy', (laser, enemy) =>{
   enemy.destroy()
   play('monster death 1')
   laser.destroy()
 })
-  onCollide("laser","dragon", (laser, enemy) =>{
+  onCollide('laser','dragon', (laser, enemy) =>{
   enemy.destroy()
-  
-  enemy.enterState("idle")
-  
+  //enemy.enterState('idle')
   play('monster death 1')
   laser.destroy()
 })
-
   
-  //const game_level = addLevel(current_map, levelcfg)
+  const game_level = addLevel(current_map, levelcfg)
 
 })
 
