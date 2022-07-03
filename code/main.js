@@ -502,15 +502,10 @@ scene('game', ({level_id}) => {
   	mob.move(dir.scale(DRAGON_SPEED))
     })
   // Have to manually call enterState() to trigger the onStateEnter("move") event we defined above.
-  mob.enterState('move')
-    
+  mob.enterState('move')  
     
   })
   
-
-  
-
-
   
   const dialog = addDialog()
   const level_label = add([
@@ -528,9 +523,7 @@ scene('game', ({level_id}) => {
     z(190)
   ])
   
-
-
-  hero.onCollide("dragon", () => {
+  hero.onCollide('dragon', () => {
     //play('halape')
 		hero.hurt(100)
    // health_label.text = health: ${hero.hp()}
@@ -540,12 +533,12 @@ scene('game', ({level_id}) => {
     //burp()
     
 	})
-  hero.onCollide("character", (ch) => {
+  hero.onCollide('character', (ch) => {
 		dialog.say(ch.msg)
     console.log('colliding')
 	})
-  hero.onCollide("monk", () => {
-    armor.use(sprite("mark"))
+  hero.onCollide('monk', () => {
+    armor.use(sprite('mark'))
     play('halape')
 		hero.heal(100)
    // health_label.text = health: ${hero.hp()}
@@ -554,7 +547,7 @@ scene('game', ({level_id}) => {
     //burp()
     
 	})
-  hero.onCollide("healer", () => {
+  hero.onCollide('healer', () => {
     play('healer hero')
 		hero.heal(100)
    // health_label.text = health: ${hero.hp()}
@@ -563,13 +556,13 @@ scene('game', ({level_id}) => {
     //burp()
     
 	})
-  hero.onCollide("bean", () => {
+  hero.onCollide('bean', () => {
     burp()
 	})
-  hero.onCollide("spicelord1", () => {
+  hero.onCollide('spicelord1', () => {
     play('spicelord1sound')
 	})
-  hero.onCollide("weapon1", (weapon) => {
+  hero.onCollide('weapon1', (weapon) => {
     play('clove king')
     weapon.destroy()
     projector.opacity = 1
@@ -577,23 +570,23 @@ scene('game', ({level_id}) => {
     debug.log('t to shoot')
     
 	})
-  hero.onCollide("husaria_armor", (husaria) => {
+  hero.onCollide('husaria_armor', (husaria) => {
     //play('clove king')
     //laser.use(sprite("anisebullet"))
-    armor.use(sprite("husaria"))
+    armor.use(sprite('husaria'))
     husaria.destroy()
     armor.opacity = 1
     
 	})
-  onCollide("laser","enemy", (laser, enemy) =>{
+  onCollide('laser','enemy', (laser, enemy) =>{
   enemy.destroy()
   play('monster death 1')
   laser.destroy()
 })
-  onCollide("laser","dragon", (laser, enemy) =>{
+  onCollide('laser','dragon', (laser, enemy) =>{
   enemy.destroy()
   
-  enemy.enterState("idle")
+  enemy.enterState('idle')
   
   play('monster death 1')
   laser.destroy()
