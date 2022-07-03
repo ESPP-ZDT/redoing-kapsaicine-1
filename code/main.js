@@ -344,7 +344,6 @@ scene('game', ({level_id}) => {
         scale(0.07),
         origin('center')
       ],
-      
     //MOB COLLIDERS
     '$': () =>[
       sprite('mobcol1'),//floor sprite
@@ -354,7 +353,6 @@ scene('game', ({level_id}) => {
         z(2),
         scale(0.10),
         origin('center')
-      
       ],
     //END OF LEVEL
     'p': () =>[
@@ -365,26 +363,26 @@ scene('game', ({level_id}) => {
         area(),
       ],
     //DRABINY
-    "H": () => [
-  		sprite("ladder"),
+    'H': () => [
+  		sprite('ladder'),
   		area(),
-  		origin("bot"),
-  		"ladder",
+  		origin('bot'),
+  		'ladder',
       scale(0.07),
   	  ],
     //SHITTY MONSTERS
-    "w": () => [
-  		sprite("paprikawraith"),
+    'w': () => [
+  		sprite('paprikawraith'),
   		area(),
-  		origin("center"),
-  		"enemy",'paprika',
+  		origin('center'),
+  		'enemy','paprika',
       patrol(),
       scale(0.07),
   	  ],
-    "d": () => [
-  		sprite("bean"),
+    'd': () => [
+  		sprite('bean'),
   		area(),
-  		origin("center"),
+  		origin('center'),
   		'bean',
     
   	  ],
