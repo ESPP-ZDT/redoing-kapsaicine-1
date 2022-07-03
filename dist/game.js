@@ -3436,61 +3436,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
         scale(0.07)
       ],
       "0": () => [
-        sprite("desflor1"),
-        "floor",
-        area(scale(1, 0.5)),
-        solid(),
-        z(2),
-        scale(0.07),
-        origin("center")
-      ],
-      "9": () => [
-        sprite("desflor2"),
-        "floor",
-        area(scale(1, 0.5)),
-        solid(),
-        z(2),
-        scale(0.07),
-        origin("center")
-      ],
-      "8": () => [
         sprite("desflor3"),
-        "floor",
-        area(scale(1, 0.5)),
-        solid(),
-        z(2),
-        scale(0.07),
-        origin("center")
-      ],
-      "7": () => [
-        sprite("desflor4"),
-        "floor",
-        area(scale(1, 0.5)),
-        solid(),
-        z(2),
-        scale(0.07),
-        origin("center")
-      ],
-      "+": () => [
-        sprite("dstile1"),
-        "floor",
-        area(scale(1, 0.5)),
-        solid(),
-        z(2),
-        scale(0.07),
-        origin("center")
-      ],
-      ">": () => [
-        sprite("dstile2"),
-        "floor",
-        area(scale(1, 0.5)),
-        solid(),
-        z(2),
-        scale(0.07),
-        origin("center")
-      ],
-      ".": () => [
-        sprite("dstile3"),
         "floor",
         area(scale(1, 0.5)),
         solid(),
@@ -3650,7 +3596,6 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
         }
       }
     };
-    const game_level = addLevel(current_map, levelcfg);
     let dragon = [get("dragon")[0], get("dragon")[1], get("dragon")[2]];
     dragon.forEach((mob) => {
       mob.onStateEnter("idle", () => __async(void 0, null, function* () {
@@ -3698,17 +3643,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       fixed(),
       z(17)
     ]);
-    const health_label = add([
-      text("Hero health: " + hero.hp()),
-      pos(400, 0),
-      scale(0.3),
-      fixed(),
-      z(190)
-    ]);
     hero.onCollide("dragon", () => {
-      hero.hurt(100);
-      health_label.text = `Hero health: ${hero.hp()}`;
-      debug.log("hero health" + hero.hp());
       go("lose");
     });
     hero.onCollide("character", (ch) => {
@@ -3718,14 +3653,10 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     hero.onCollide("monk", () => {
       armor.use(sprite("mark"));
       play("halape");
-      hero.heal(100);
-      health_label.text = `Hero health: ${hero.hp()}`;
-      debug.log("hero health" + hero.hp());
     });
     hero.onCollide("healer", () => {
       play("healer hero");
       hero.heal(100);
-      health_label.text = `Hero health: ${hero.hp()}`;
     });
     hero.onCollide("bean", () => {
       burp();
@@ -3751,10 +3682,10 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     });
     onCollide("laser", "dragon", (laser, enemy) => {
       enemy.destroy();
-      enemy.enterState("idle");
       play("monster death 1");
       laser.destroy();
     });
+    const game_level = addLevel(current_map, levelcfg);
   });
   go("game", { level_id });
   scene("lose", () => {
