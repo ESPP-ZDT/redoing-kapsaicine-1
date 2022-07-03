@@ -22,11 +22,11 @@ const JUMP_SPEED = 600 //hero movement speed variable
 const DRAGON_SPEED = 100
 const BULLET_SPEED = 800
 
-scene("game", ({level_id}) => {
+scene('game', ({level_id}) => {
   gravity(1600)
   let background1 =
   add([
-    sprite("bckg1"),
+    sprite('bckg1'),
     opacity(1),
     scale(30),
     origin('center'),
@@ -35,7 +35,7 @@ scene("game", ({level_id}) => {
   ]);
   let background2 =
   add([
-    sprite("desert"),
+    sprite('desert'),
     opacity(1),
     scale(2),
     //layer("bg")
@@ -58,7 +58,7 @@ scene("game", ({level_id}) => {
   ])
   const projector = add([
   	pos(),
-  	sprite("projector"),
+  	sprite('projector'),
   	origin("center"),
     //color(105,105,105),
     scale(0.01),
@@ -69,8 +69,8 @@ scene("game", ({level_id}) => {
   ])
   const armor = add([
   	pos(),
-  	sprite("armor1"),
-  	origin("center"),
+  	sprite('armor1'),
+  	origin('center'),
     //color(105,105,105),
     scale(0.03),
     //health(1000),
@@ -90,10 +90,10 @@ scene("game", ({level_id}) => {
   })
   
   const dirs = {
-		"left": LEFT,
-		"right": RIGHT,
-		"up": UP,
-		"down": DOWN,
+		'left': LEFT,
+		'right': RIGHT,
+		'up': UP,
+		'down': DOWN,
     
 	}
 
