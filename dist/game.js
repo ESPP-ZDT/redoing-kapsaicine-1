@@ -3436,61 +3436,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
         scale(0.07)
       ],
       "0": () => [
-        sprite("desflor1"),
-        "floor",
-        area(scale(1, 0.5)),
-        solid(),
-        z(2),
-        scale(0.07),
-        origin("center")
-      ],
-      "9": () => [
-        sprite("desflor2"),
-        "floor",
-        area(scale(1, 0.5)),
-        solid(),
-        z(2),
-        scale(0.07),
-        origin("center")
-      ],
-      "8": () => [
         sprite("desflor3"),
-        "floor",
-        area(scale(1, 0.5)),
-        solid(),
-        z(2),
-        scale(0.07),
-        origin("center")
-      ],
-      "7": () => [
-        sprite("desflor4"),
-        "floor",
-        area(scale(1, 0.5)),
-        solid(),
-        z(2),
-        scale(0.07),
-        origin("center")
-      ],
-      "+": () => [
-        sprite("dstile1"),
-        "floor",
-        area(scale(1, 0.5)),
-        solid(),
-        z(2),
-        scale(0.07),
-        origin("center")
-      ],
-      ">": () => [
-        sprite("dstile2"),
-        "floor",
-        area(scale(1, 0.5)),
-        solid(),
-        z(2),
-        scale(0.07),
-        origin("center")
-      ],
-      ".": () => [
-        sprite("dstile3"),
         "floor",
         area(scale(1, 0.5)),
         solid(),
